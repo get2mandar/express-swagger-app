@@ -1,0 +1,164 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "NodeJS Express Swagger App",
+      "description": "Demo Application for Node JS Express with Swagger API Documentation",
+      "license": {
+        "name": "ISC",
+        "url": "https://opensource.org/licenses/ISC"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "Employees",
+        "description": "APIs for Employee Model"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/employees": {
+        "post": {
+          "tags": [
+            "Employees"
+          ],
+          "description": "Create new Employee",
+          "parameters": [
+            {
+              "name": "Employee",
+              "in": "body",
+              "description": "Employee that we want to create",
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New Employee is Created",
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Employees"
+          ],
+          "summary": "Get All Employees",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Employees"
+              }
+            }
+          }
+        }
+      },
+      "/employees/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of Employee that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Employees"
+          ],
+          "summary": "Get Employee with given ID",
+          "responses": {
+            "200": {
+              "description": "Employee is found",
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Employee with given ID",
+          "tags": [
+            "Employees"
+          ],
+          "responses": {
+            "200": {
+              "description": "Employee is deleted",
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Employee with give ID",
+          "tags": [
+            "Employees"
+          ],
+          "parameters": [
+            {
+              "name": "Employee",
+              "in": "body",
+              "description": "Employee with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Employee is Updated",
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Employee": {
+        "required": [
+          "_id"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "emailID": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          }
+        }
+      },
+      "Employees": {
+        "type": "array",
+        "$ref": "#/definitions/Employee"
+      }
+    }
+  }
